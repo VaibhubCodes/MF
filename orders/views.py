@@ -3,6 +3,7 @@ import hashlib
 import razorpay
 from django.conf import settings
 from django.shortcuts import get_object_or_404
+from django.contrib.auth import get_user_model
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from .models import Cart, CartItem, Order, OrderItem, OrderStatus,Address,Payment
@@ -17,6 +18,7 @@ from notifications.utils import send_push_notification
 import logging
 
 logger = logging.getLogger(__name__)
+User = get_user_model()
 # --- Updated Cart View ---
 class CartView(generics.RetrieveUpdateAPIView):
     serializer_class = CartSerializer
