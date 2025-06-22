@@ -65,12 +65,13 @@ class OrderSerializer(serializers.ModelSerializer):
     payment_details = serializers.SerializerMethodField()
     latest_status = serializers.SerializerMethodField()
     delivery_address = AddressSerializer(read_only=True)
+    delivery_person = UserSerializer(read_only=True)
     created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", read_only=True)  # Format date and time
     user = serializers.SerializerMethodField()  # Use a custom field for user details
 
     class Meta:
         model = Order
-        fields = ['id', 'user', 'total_amount', 'delivery_address', 'items', 'payment_details', 'latest_status','created_at']
+        fields = ['id', 'user', 'total_amount', 'delivery_address', 'delivery_person', 'items', 'payment_details', 'latest_status', 'created_at']
 
     def get_user(self, obj):
         # Fetch the full user details
